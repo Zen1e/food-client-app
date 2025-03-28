@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import axios from "axios";
-import { SetStateAction, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 
 export default function signup() {
   const [step, setStep] = useState(1);
@@ -17,7 +17,9 @@ export default function signup() {
   const [confirmError, setConfirmError] = useState(false);
   const [duplicateError, setDuplicateError] = useState(false);
 
-  localStorage.clear();
+  useEffect(()=> {
+    localStorage.clear();
+  },[])
 
 
     const handleInput =(e:{ target: { value: SetStateAction<string> , name: string}})=>{
