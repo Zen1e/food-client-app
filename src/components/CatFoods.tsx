@@ -4,9 +4,14 @@ import axios from "axios";
 export default function CatFoods(props) {
   const { category,orderList,setOrderList } = props;
 
-  const [foods, setFoods] = useState();
+  const [foods, setFoods] = useState([]);
   const [addToCard, setAddToCard] = useState(false);
-  const [currAdding, setCurrAdding] = useState();
+  const [currAdding, setCurrAdding] = useState({
+    image : '',
+    foodName :"",
+    ingredients:"",
+    price: 0
+  });
   const [currAddingCount, setCurrAddingCount] = useState(1);
 
   useEffect(() => {
@@ -61,7 +66,7 @@ export default function CatFoods(props) {
         <div className="text-black bg-black/30 z-10 fixed w-screen h-screen top-0 left-0 flex justify-center items-center">
           <div className="w-[800px] h-[400px] bg-white rounded-[10px] flex p-[20px] justify-between">
             <div className="w-[48.5%] h-full border rounded-[8px] overflow-hidden">
-              <img src={currAdding?.image} className="w-full h-full object-cover"/>
+              <img src={currAdding.image} className="w-full h-full object-cover"/>
             </div>
             <div className="flex flex-col w-[48.5%] h-full">
               <div className="w-full flex justify-end">
