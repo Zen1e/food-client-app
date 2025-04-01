@@ -29,7 +29,7 @@ export default function Header(props) {
 
   useEffect(()=> {
     const findUser = async() => {
-      const response = await axios.post("http://localhost:3001/users/find",{
+      const response = await axios.post("https://food-service-app-ciba.onrender.com/users/find",{
         id: id
       },
       { headers: { Authorization: `Bearer ${window.localStorage.authToken}` } })
@@ -59,7 +59,7 @@ export default function Header(props) {
 
   const submitLocation = async () => {
     try{
-      await axios.put("http://localhost:3001/users/", {
+      await axios.put("https://food-service-app-ciba.onrender.com/users/", {
       id: id,
       location: locText,
     },

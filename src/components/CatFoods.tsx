@@ -16,7 +16,7 @@ export default function CatFoods(props) {
 
   useEffect(() => {
     const fetchFoods = async () => {
-      const res = await axios.get(`http://localhost:3001/food/${category}`,
+      const res = await axios.get(`https://food-service-app-ciba.onrender.com/food/${category}`,
         { headers: { Authorization: `Bearer ${window.localStorage.authToken}` } });
       setFoods(res.data.foods);
     };
@@ -80,7 +80,7 @@ export default function CatFoods(props) {
                 <div className="flex justify-between">
                   <div>
                     <div className="text-[20px]">Total price</div>
-                    <div className="font-bold text-[26px]">${currAddingCount*currAdding?.price}</div>
+                    <div className="font-bold text-[26px]">${(currAddingCount*currAdding?.price).toFixed(2)}</div>
                   </div>
                   <div className="flex gap-[24px]">
                     <div className="border rounded-full w-[50px] h-[50px] text-[30px] pt-[-50px] pl-[17px] hover:border-black cursor-pointer select-none" onClick={()=>currAddingCount !== 1 && setCurrAddingCount(currAddingCount-1)}>-</div>
@@ -102,12 +102,12 @@ export default function CatFoods(props) {
             </div>
             <div className="w-full h-[100px] text-black">
               <div className="flex justify-between mt-[10px] items-center">
-                <div className="text-[30px] font-bold text-red-500">
+                <div className="text-[30px] font-bold text-red-500 flex w-[290px] truncate">
                   {el.foodName}
                 </div>
                 <div className="text-[20px]">{el.price}$</div>
               </div>
-              <div className="">{el.ingredients}</div>
+              <div className="line-clamp-2 overflow-ellipsis">{el.ingredients}</div>
             </div>
           </div>
         ))}

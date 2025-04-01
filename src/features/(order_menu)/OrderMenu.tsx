@@ -37,7 +37,7 @@ export default function OrderMenu(props) {
   }, [orderList]);
 
   const checkout = async () => {
-    const response = await axios.post("http://localhost:3001/users/find", {
+    const response = await axios.post("https://food-service-app-ciba.onrender.com/users/find", {
       id: id,
     },
     { headers: { Authorization: `Bearer ${window.localStorage.authToken}` } });
@@ -46,7 +46,7 @@ export default function OrderMenu(props) {
     } else if (!orderList.length) {
       toast.info("Buy at least one item");
     } else {
-      const res = await axios.post("http://localhost:3001/order/", {
+      const res = await axios.post("https://food-service-app-ciba.onrender.com/order/", {
         user: id,
         username: name,
         totalPrice: total,
@@ -62,7 +62,7 @@ export default function OrderMenu(props) {
 
   useEffect(() => {
     const getOrder = async () => {
-      const response = await axios.post("http://localhost:3001/order/history", {
+      const response = await axios.post("https://food-service-app-ciba.onrender.com/order/history", {
         user: id,
       },
       { headers: { Authorization: `Bearer ${window.localStorage.authToken}` } });

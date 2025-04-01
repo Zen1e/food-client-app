@@ -10,7 +10,7 @@ export default function Categories() {
   useEffect(() => {
     const fetchCategory = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/cat/");
+        const response = await axios.get("https://food-service-app-ciba.onrender.com/cat/");
         setCatList(response.data.cats);
       } catch (err) {
         console.log(err);

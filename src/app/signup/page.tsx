@@ -47,7 +47,7 @@ export default function signup() {
   };
 
     const checkDuplicate = async () => {
-      const response = await axios.post("http://localhost:3001/users/check",{
+      const response = await axios.post("https://food-service-app-ciba.onrender.com/users/check",{
         name: loginData.email,
       })
       return response.data.exists;
@@ -66,7 +66,7 @@ export default function signup() {
 
     const sendData = async() => {
       try{
-          const response = await axios.post("http://localhost:3001/users/",{
+          const response = await axios.post("https://food-service-app-ciba.onrender.com/users/",{
           name: loginData.email,
           password: loginData.password,
         });
