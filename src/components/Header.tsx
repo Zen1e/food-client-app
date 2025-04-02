@@ -36,7 +36,9 @@ export default function Header(props) {
       setdbLocation(response.data.location);
       setLocText(response.data.location);
     }
-    findUser();
+    if(window.localStorage.authToken){
+      findUser();
+    }
   },[])
 
   

@@ -74,9 +74,9 @@ export default function login() {
             value={passwordInput}
             placeholder="Password"
           />
-          <button className="mt-[15px] w-fit underline">
+          {/* <button className="mt-[15px] w-fit underline">
             Forgot password?
-          </button>
+          </button> */}
           <button
             className="bg-black text-white rounded-[5px] py-[8px] mt-[40px]"
             onClick={login}
