@@ -3,12 +3,14 @@ import "../../app/globals.css";
 import { ShoppingCart, X, Soup, Timer, Map } from "lucide-react";
 import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
+import { useRouter } from "next/navigation";
 
 export default function OrderMenu(props) {
   const { ordermenu, setOrdermenu, orderList, setOrderList, id, name} = props;
   const [orderState, setOrderState] = useState(1);
   const [total, setTotal] = useState<number>(0);
   const [orderHistory, setOrderHistory] = useState([]);
+  const router = useRouter();
 
   const handleDecrease = (index) => {
     setOrderList((prevList) => {
@@ -62,11 +64,16 @@ export default function OrderMenu(props) {
 
   useEffect(() => {
     const getOrder = async () => {
-      const response = await axios.post("https://food-service-app-ciba.onrender.com/order/history", {
-        user: id,
-      },
-      { headers: { Authorization: `Bearer ${window.localStorage.authToken}` } });
-      setOrderHistory(response.data);
+      try{
+
+        const response = await axios.post("https://food-service-app-ciba.onrender.com/order/history", {
+          user: id,
+        },
+        { headers: { Authorization: `Bearer ${window.localStorage.authToken}` } });
+        setOrderHistory(response.data);
+      }catch(err){
+        err.status === 403 ? router.push("login") : "";
+      }
     };
 
     getOrder();
@@ -80,7 +87,7 @@ export default function OrderMenu(props) {
         className="h-full w-[calc(100vw-600px)]"
         onClick={() => setOrdermenu(false)}
       ></div>
-      <div className="h-full w-[600px] bg-[#404040] move-in rounded-l-[15px] p-[30px] pt-[40px] flex flex-col gap-[24px]">
+      <div className="h-screen w-[600px] bg-[#404040] move-in rounded-l-[15px] p-[30px] pt-[40px] flex flex-col gap-[24px]">
         <div className="flex text-[20px] items-center gap-[15px]">
           <ShoppingCart />
           <div>Order detail</div>
@@ -112,8 +119,8 @@ export default function OrderMenu(props) {
           </div>
         </div>
         {orderState === 1 ? (
-          <div className="flex flex-col gap-[30px] h-full">
-            <div className="w-full bg-white rounded-[20px] p-[20px] text-black overflow-scroll h-[565px]">
+          <div className="flex flex-col gap-[30px] h-screen overflow-scroll">
+            <div className="w-full bg-white rounded-[20px] p-[20px] text-black overflow-scroll flex-grow">
               <div className="text-[25px] font-bold">My cart</div>
               <div className="flex flex-col">
                 {orderList.map((el, index) => (

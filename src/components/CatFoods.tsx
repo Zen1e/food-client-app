@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 export default function CatFoods(props) {
-  const { category, orderList, setOrderList } = props;
+  const { category, orderList, setOrderList, pushSuccess } = props;
 
   const [foods, setFoods] = useState([]);
   const [addToCard, setAddToCard] = useState(false);
@@ -42,6 +42,9 @@ export default function CatFoods(props) {
   };
 
   const addFoodToCard = () => {
+
+    pushSuccess();
+
     const exists = orderList.some((el) => el[0] === currAdding);
 
     if (exists) {
